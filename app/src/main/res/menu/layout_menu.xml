@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/group_one">
+
+        <item android:title="马豪"
+            android:id="@+id/menu_one"
+            android:icon="@mipmap/ic_launcher"/>
+
+        <item android:title="徐小凤"
+            android:id="@+id/menu_two"
+            android:icon="@mipmap/ic_launcher"/>
+
+        <item android:title="badly"
+            android:checkable="true"
+            android:icon="@mipmap/ic_launcher"
+            android:actionLayout="@layout/layout_header"
+            android:id="@+id/menu_three"></item>
+
+    </group>
+
+    <item android:id="@+id/menu_four"
+        android:icon="@mipmap/ic_launcher"
+        android:title="thanks"/>
+
+    <item android:id="@+id/menu_five"
+          android:icon="@mipmap/ic_launcher"
+          android:title="haohao"/>
+
+    <group android:id="@+id/group_two">
+
+        <item android:title="生日快乐"
+              android:id="@+id/menu_six"
+              android:icon="@mipmap/ic_launcher"/>
+
+        <item android:title="love"
+              android:icon="@mipmap/ic_launcher"
+              android:id="@+id/menu_seven"/>
+    </group>
+
+</menu>

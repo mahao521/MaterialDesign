@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mahao.materialdesigndemo.MainActivity">
+
+    <android.support.v4.widget.DrawerLayout
+        android:scrollbars="none"
+        android:id="@+id/layout_draw"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/layout_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:background="@color/tabbg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/layout_tab"
+                    app:tabBackground="@color/tabbg"
+                    app:tabMode="fixed"
+                    app:tabIndicatorColor="#050505"
+                    android:layout_centerHorizontal="true"
+                    app:tabIndicatorHeight="2dp"
+                    app:tabGravity="fill"
+                    app:tabSelectedTextColor="#161616"
+                    app:tabTextColor="#565353"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content">
+
+                </android.support.design.widget.TabLayout>
+
+            </RelativeLayout>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/view_pager"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </android.support.v4.view.ViewPager>
+
+        </LinearLayout>
+
+        <android.support.design.widget.NavigationView
+            android:scrollbars="none"
+            android:id="@+id/design_navigation_view"
+            android:layout_gravity="start"
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            app:itemIconTint="@null"
+            app:headerLayout="@layout/layout_header"
+            app:menu="@menu/layout_menu">
+        </android.support.design.widget.NavigationView>
+
+
+    </android.support.v4.widget.DrawerLayout>
+
+</LinearLayout>

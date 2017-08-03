@@ -16,14 +16,7 @@ import android.view.View;
 /**
  * Created by Penghy on 2017/7/19.
  */
-public class MyBehavior {
-
-    /**
-     * Default constructor for instantiating Behaviors.
-     */
-    public MyBehavior() {
-    }
-
+public class ChildBehavior {
     /**
      * Default constructor for inflating Behaviors from layout. The Behavior will have
      * the opportunity to parse specially defined layout parameters. These parameters will
@@ -32,7 +25,7 @@ public class MyBehavior {
      * @param context
      * @param attrs
      */
-    public MyBehavior(Context context, AttributeSet attrs) {
+    public ChildBehavior(Context context, AttributeSet attrs) {
     }
 
     /**
@@ -390,7 +383,7 @@ public class MyBehavior {
      *
      * @see NestedScrollingParent#onNestedScroll(View, int, int, int, int)
      */
-    public void onNestedScroll(CoordinatorLayout coordinatorLayout, View  child, View target,
+    public void onNestedScroll(View coordinatorLayout, View  child, View target,
                                int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
         // Do nothing
     }
@@ -584,6 +577,45 @@ public class MyBehavior {
     public boolean getInsetDodgeRect(@NonNull CoordinatorLayout parent, @NonNull View  child,
                                      @NonNull Rect rect) {
         return false;
+    }
+
+
+    /**
+     *    设置尺寸修改，监听
+     * @param parent
+     * @param child
+     * @param w
+     * @param h
+     * @param oldw
+     * @param oldh
+     */
+    public void onSizeChanged(View parent, View child, int w, int h, int oldw, int oldh){
+
+    }
+
+    /**
+     *   设置child加载xml完成的监听
+     * @param parent
+     * @param child
+     */
+    public void onLayoutFinish(View parent,View child){
+
+
+    }
+
+    /**
+     *    设置滑动事件
+     * @param parent
+     * @param child
+     * @param event
+     * @param x
+     * @param y
+     * @param oldx
+     * @param oldy
+     */
+    public void onTouchMove(View parent,View child ,MotionEvent event,float x,float y,float oldx,float oldy){
+
+
     }
 
 }

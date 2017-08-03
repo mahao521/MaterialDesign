@@ -109,7 +109,7 @@ public class ContentBg extends View {
         canvas.drawRect(0,0,mContentWidth,mContentHeight,mPaint);
         canvas.drawARGB(120, 0, 0, 0);
 
-        mBitmapPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        mBitmapPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
         canvas.drawBitmap(mBitmap,mContentWidth/2 - mBitmap.getWidth()/2,
                 mContentHeight/2-mBitmap.getHeight()/2,mBitmapPaint);
         mBitmapPaint.setXfermode(null);

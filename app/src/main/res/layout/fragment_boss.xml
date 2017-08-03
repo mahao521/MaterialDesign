@@ -15,6 +15,7 @@
                 android:layout_height="wrap_content">
 
                   <TextView
+                      android:id="@+id/txt_one"
                       android:text="1234"
                       android:textColor="@color/colorPrimary"
                       android:gravity="center_vertical"
@@ -23,6 +24,7 @@
                       android:layout_height="40dp"/>
 
                   <TextView
+                      android:id="@+id/txt_two"
                       android:text="1234"
                       android:textColor="@color/colorPrimary"
                       android:gravity="center_vertical"
@@ -39,13 +41,19 @@
                       android:layout_width="match_parent"
                       android:layout_height="40dp"/>
 
-                  <TextView
-                      android:text="1234"
-                      android:textColor="@color/colorPrimary"
-                      android:gravity="center_vertical"
-                      android:layout_marginTop="20dp"
+                  <Button
+                      android:id="@+id/btn_bg"
+                      android:text="点我飞跃"
+                      android:background="@drawable/btn_bg"
                       android:layout_width="match_parent"
-                      android:layout_height="40dp"/>
+                      android:layout_height="wrap_content"/>
+
+
+                  <Button
+                      android:id="@+id/btn_date"
+                      android:text="2017年8月2日"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"/>
 
                   <TextView
                       android:text="1234"
@@ -63,7 +71,6 @@
                       android:layout_width="match_parent"
                       android:layout_height="40dp"/>
 
-
                   <TextView
                       android:text="1234"
                       android:textColor="@color/colorPrimary"
@@ -71,6 +78,15 @@
                       android:layout_marginTop="20dp"
                       android:layout_width="match_parent"
                       android:layout_height="40dp"/>
+
+
+
+                  <ImageView
+                      android:id="@+id/img_boss"
+                      android:transitionName="@string/app_name"
+                      android:src="@mipmap/ic_launcher_round"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"/>
 
                   <TextView
                       android:text="1234"

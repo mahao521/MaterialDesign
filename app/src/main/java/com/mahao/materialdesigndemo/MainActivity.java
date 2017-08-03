@@ -3,7 +3,6 @@ package com.mahao.materialdesigndemo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -18,9 +17,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
@@ -110,10 +113,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mTabLayout.setupWithViewPager(mViewPager);
 
         indictorLength();
+        View headerView = mGationView.getHeaderView(0);
+        final ImageView imgHeader = (ImageView) headerView.findViewById(R.id.img_header);
+        imgHeader.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+/*
+                Intent intents = new Intent(MainActivity.this,ThridActivity.class);
 
+                Pair pair = new Pair(imgHeader,"mahao");
+                Pair pair1 = new Pair(imgHeader,"lisi");
 
-
-
+                ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, pair, pair1);
+                startActivity(intents,optionsCompat.toBundle());
+                mDrawerLayout.closeDrawer(GravityCompat.START);*/
+            }
+        });
     }
 
     /**
@@ -280,6 +295,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.menu_six:
 
+
                 break;
 
             case R.id.menu_seven:
@@ -314,7 +330,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TopSnackBar.SnackbarLayout layout = (TopSnackBar.SnackbarLayout) view;
         snackView(layout);
         return snackbar;
-
     }
 
     /**
@@ -330,5 +345,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TextView txtView = (TextView) myView.findViewById(R.id.txt_show_snack);
         txtView.setText("这是一条提示消息哦！");
         layout.addView(myView);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        if(!mViewPager.onTouchEvent(event)){
+
+            mDrawerLayout.openDrawer(Gravity.START);
+        }
+        return super.onTouchEvent(event);
     }
 }

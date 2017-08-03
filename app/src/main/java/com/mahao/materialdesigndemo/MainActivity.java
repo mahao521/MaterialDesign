@@ -8,7 +8,6 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -19,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.FrameLayout;
@@ -28,6 +28,7 @@ import android.widget.TextView;
 
 import com.mahao.materialdesigndemo.adapter.FragmentAdapter;
 import com.mahao.materialdesigndemo.topsnack.TopSnackBar;
+import com.mahao.materialdesigndemo.utils.HomeViewPager;
 import com.mahao.materialdesigndemo.utils.SnackCallBack;
 
 import java.lang.reflect.Field;
@@ -36,6 +37,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static java.security.AccessController.getContext;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -50,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
      TabLayout mTabLayout;
 
     @BindView(R.id.view_pager)
-    ViewPager mViewPager;
+    HomeViewPager mViewPager;
 
     @BindView(R.id.design_navigation_view)
     NavigationView mGationView;
@@ -60,6 +63,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private  Snackbar snackBar2 = null;
 
     private TopSnackBar mTopSnackBar = null;
+
+    private  float downX = 0,downY = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -320,7 +325,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return snackbar;
     }
 
-
     /**
      * @param snackbar  设置自己的snackBar--View
      */
@@ -350,10 +354,81 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
+        Log.i("mahao","event");
         if(!mViewPager.onTouchEvent(event)){
 
+          /*  mDrawerLayout.openDrawer(Gravity.START);
+            mDrawerLayout.onTouchEvent();
+            mDrawerLayout.requestDisallowInterceptTouchEvent(true);
+            mDrawerLayout.dispatchTouchEvent(event);*/
             mDrawerLayout.openDrawer(Gravity.START);
+            mDrawerLayout.isDrawerOpen(Gravity.START);
+            mDrawerLayout.onTouchEvent(event);
+            return true;
         }
         return super.onTouchEvent(event);
     }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+
+        switch (ev.getAction()){
+
+            case MotionEvent.ACTION_DOWN:
+
+                downX = ev.getX();
+                downY = ev.getY();
+                break;
+
+            case MotionEvent.ACTION_MOVE:
+
+                float moveX = ev.getX();
+                float moveY = ev.getY();
+                int touchSlop = getTouchSlop();
+                if(moveX > touchSlop && Math.abs(moveX-downX) > Math.abs(moveY-downY)){
+
+                    float isDirectX = moveX - downX;
+                    if(isDirectX > 0 && mViewPager.getCurrentItem() == 0 ){ //向右滑动
+
+                        mViewPager.setFlag(true);
+                    }else if(isDirectX <0 && mViewPager.getCurrentItem() == 0 ){ //向左滑动
+
+                        mViewPager.setFlag(false);
+                    }
+                }
+                break;
+
+            case MotionEvent.ACTION_UP:
+
+                float currentX = ev.getX();
+                float currentY = ev.getY();
+
+                float isDirectX = currentX - downX;
+                float isDirectY = currentY - downY;
+                Log.i("mahao","currentX - downX" + isDirectX);
+                if(Math.abs(isDirectX) > Math.abs(isDirectY)){ //保证水平移动
+
+                    if(isDirectX > 0 && mViewPager.getCurrentItem() == 0 ){ //向右滑动
+
+                        mViewPager.setFlag(true);
+                    }else if(isDirectX <0 && mViewPager.getCurrentItem() == 0 ){ //向左滑动
+
+                        mViewPager.setFlag(false);
+                    }
+                }
+                break;
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    /**
+     * Distance in pixels a touch can wander before we think the user is scrolling
+     */
+    public int getTouchSlop(){
+
+        int touchSlop =  ViewConfiguration.get(this).getScaledTouchSlop();
+        return touchSlop;
+    }
+
+
 }

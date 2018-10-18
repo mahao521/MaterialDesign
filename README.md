@@ -1,10 +1,9 @@
 # MaterialDesign
-从上向下的SnackBar；
 
 修改snackBar源码从上向下弹出；
 
-自定义behavior；
+自定义behavior实现coordinaLayout控件；
 
 android过渡动画；
 
-事件分发处理
+拖拽事件分发处理
